@@ -1,39 +1,18 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
-//import PersonForm from '../../components/PersonForm/index'
-//import styles from './familyManagement.module.scss'
+import Step from '../../components/stepper'
 
 export default function AddModal(props) {
-
-  const [typeOfAdding, setTypeOfAdding] = useState(0)
 
   function showAddModal() {
     props.showAddModalProps()
   }
 
-  function handleTypeOfAdding(e) {
-    if (e.target.value === "Tutor 1") {
-      setTypeOfAdding(0)
-    } else if (e.target.value === "Tutor 2") {
-      setTypeOfAdding(1)
-    } else {
-      setTypeOfAdding(2)
-    }
-  }
-
   return (
     <Modal isOpen={props.addModal} toggle={showAddModal} size="lg">
-      <ModalHeader toggle={showAddModal}>Añadir familiar: </ModalHeader>
+      <ModalHeader toggle={showAddModal}>Añadir artículos: </ModalHeader>
       <ModalBody>
-        <FormGroup>
-          <Label for="exampleSelect">Seleccione el familiar a añadir: </Label>
-          <Input type="select" name="select" id="exampleSelect" onChange={handleTypeOfAdding}>
-            <option>Tutor 1 </option>
-            <option>Tutor 2</option>
-            <option>Hijo/a</option>
-          </Input>
-        </FormGroup>
-        
+        <Step />
       </ModalBody>
       <ModalFooter>
         <Button color="primary" /*onClick={handleAddFamiliar}*/ onClick={showAddModal} >Ok</Button>{' '}

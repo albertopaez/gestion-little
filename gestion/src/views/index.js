@@ -62,14 +62,14 @@ export default class TabsIndex extends React.Component {
           <TabPane tabId="2">
             <Row>
               <Col sm="12">
-                <Invoice />
+              <Product />
               </Col>
             </Row>
           </TabPane>
           <TabPane tabId="3">
             <Row>
               <Col sm="12">
-                <Product />
+                <Invoice />
               </Col>
             </Row>
           </TabPane>
