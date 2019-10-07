@@ -42,5 +42,9 @@
   "cliente": {
     "dataSource": "gestiondb",
     "public": true
+  },
+  "factura": {
+    "dataSource": "gestiondb",
+    "public": true
   }
 }
