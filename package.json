@@ -7,11 +7,15 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "prestart": "npm run --prefix client build",
     "start": "node .",
-    "posttest": "npm run lint && npm audit"
+    "start-dev": "concurrently \"nodemon .\" \"npm start --prefix client\"",
+    "postinstall": "npm install --prefix client",
+    "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
     "compression": "^1.0.3",
+    "concurrently": "^5.0.0",
     "cors": "^2.5.2",
     "helmet": "^3.10.0",
     "loopback": "^3.22.0",
