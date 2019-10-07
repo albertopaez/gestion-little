@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import AddModal from './AddModal';
 import EditModal from './EditModal'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Product (){
 
@@ -11,7 +13,6 @@ export default function Product (){
     const [editModal, setEditModal] = useState(false);
     const [selected, setSelected] = useState(false);
     const [actRowIndex, setActRowIndex] = useState(false)
-    const [inscribed, setInscribed] = useState([])
 
     function showAddModal(){
         setAddModal(!addModal)
@@ -29,41 +30,67 @@ export default function Product (){
         setSelected(!selected)
     }
 
-    function handleDeleteF(id){
-        var array = [...inscribed];
-        for (let index = 0; index < inscribed.length; index++) {
-          if (inscribed[index] === id) {
-            var i = index;
-          }
-        }
-        array.splice(i, 1);
-        console.log("Eliminado")
-    }
+    const handleDelete = (id) => {
+        Swal.fire({
+          title: '¿Está seguro que desea eliminar el producto?',
+          text: "Esta acción será irreversible.",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si'
+        }).then((result) => {
+          if (result.value) {
+            axios({
+              method: 'delete',
+              url: `http://localhost:8000/posts/${id}`,
+              data: null,
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS, POST, DELETE'
+              },
+            }).then(response => {
+              console.log(response.data);
+              Swal.fire(
+                '¡Eliminado!',
+                'El producto ha sido eliminado con éxito.',
+                'success'
+              )
+              //fetchUsers()
+            })
+              .catch(error => {  
+                console.log(error);   
+              });  
+          }    
+        })
+      }
 
-    const { SearchBar, ClearSearchButton } = Search;
+    const { SearchBar } = Search;
 
     const columns = [{
     dataField: 'id',
-    text: 'Client ID'
+    text: 'ID Producto'
     }, {
     dataField: 'name',
-    text: 'Client Name'
+    text: 'Nombre'
     }, {
-    dataField: 'dni',
-    text: 'DNI'
-    },{
-        dataField: 'address',
-        text: 'Dirección'
+    dataField: 'price',
+    text: 'Precio Unitario'
+    }, {
+        dataField: 'cantidad',
+        text: 'Cantidad'
     }];
 
     const products = [{
         id: 1,
-        name: 'Juan García',
-        dni: '27898755g'
+        name: 'Palomitas',
+        price: '0.80'
     }, {
         id: 2,
-        name: 'Juan Manuel',
-        dni: '47324658k',
+        name: 'Monster',
+        dni: '1',
     }];
 
     const selectRow = {
@@ -90,13 +117,13 @@ export default function Product (){
                     <EditModal showEditModalProps={showEditModal} editModal={editModal} /> {/**MODAL EDIT SELECTED FAMILIAR */}
                     <Row >
                         <Col>
-                            <Button onClick={showAddModal} style={{ marginLeft: "20px" }} >Añadir</Button>
+                            <Button onClick={showAddModal} style={{ marginLeft: "20px", marginTop: '1rem' }} >Añadir</Button>
                         </Col>
                         <Col >
-                            <Button onClick={showEditModal} style={{ marginLeft: "10px" }} >Editar</Button>
+                            <Button onClick={showEditModal} style={{ marginLeft: "10px", marginTop: '1rem' }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDeleteF()} style={{ marginLeft: "10px" }} >Eliminar</Button>
+                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
                         </Col>
                     </Row>
                 </Col>
@@ -110,8 +137,11 @@ export default function Product (){
                     {
                         props => (
                         <div>
-                            <h3>Buscar:</h3>
-                            <SearchBar { ...props.searchProps } />
+                            <Col style={{display: 'flex', flexDirection: 'row', marginTop: '1rem', justifyContent: 'center'}}>
+                                <h3>Buscar {' '}
+                                    <SearchBar { ...props.searchProps } />
+                                </h3>
+                            </Col>
                             <hr />
                             <BootstrapTable
                                 { ...props.baseProps }

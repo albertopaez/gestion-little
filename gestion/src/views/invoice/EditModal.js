@@ -1,7 +1,6 @@
 import React, { } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-//import PersonForm from '../../components/PersonForm/index'
-//import styles from './familyManagement.module.scss'
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import Step from '../../components/stepper'
 
 export default function AddModal(props) {
 
@@ -12,14 +11,10 @@ export default function AddModal(props) {
   return (
 
     <Modal isOpen={props.editModal} toggle={showEditModal} size="lg">
-      <ModalHeader toggle={showEditModal}>Editar familiar: </ModalHeader>
+      <ModalHeader toggle={showEditModal}>Editar factura: </ModalHeader>
       <ModalBody>
-        
+      <Step />
       </ModalBody>
-      <ModalFooter>
-        <Button color="primary" /*onClick={handleEditFamiliar}*/ onClick={showEditModal} >Ok</Button>{' '}
-        <Button color="neutral" onClick={showEditModal}>Cancel</Button>{' '}
-      </ModalFooter>
     </Modal>
   )
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
+import React from 'react';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Step from '../../components/stepper'
 
 export default function AddModal(props) {
@@ -10,14 +10,10 @@ export default function AddModal(props) {
 
   return (
     <Modal isOpen={props.addModal} toggle={showAddModal} size="lg">
-      <ModalHeader toggle={showAddModal}>Añadir artículos: </ModalHeader>
+      <ModalHeader toggle={showAddModal}>Añadir factura: </ModalHeader>
       <ModalBody>
         <Step />
       </ModalBody>
-      <ModalFooter>
-        <Button color="primary" /*onClick={handleAddFamiliar}*/ onClick={showAddModal} >Ok</Button>{' '}
-        <Button color="neutral" onClick={showAddModal}>Cancel</Button>{' '}
-      </ModalFooter>
     </Modal>
   )
 

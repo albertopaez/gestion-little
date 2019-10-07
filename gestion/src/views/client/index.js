@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import AddModal from './AddModal';
-import EditModal from './EditModal'
+import EditModal from './EditModal';
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Client (){
 
@@ -29,18 +31,44 @@ export default function Client (){
         setSelected(!selected)
     }
 
-    function handleDeleteF(id){
-        var array = [...inscribed];
-        for (let index = 0; index < inscribed.length; index++) {
-          if (inscribed[index] === id) {
-            var i = index;
-          }
-        }
-        array.splice(i, 1);
-        console.log("Eliminado")
-    }
+    const handleDelete = (id) => {
+        Swal.fire({
+          title: '¿Está seguro que desea eliminar el cliente?',
+          text: "Esta acción será irreversible.",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si'
+        }).then((result) => {
+          if (result.value) {
+            axios({
+              method: 'delete',
+              url: `http://localhost:8000/posts/${id}`,
+              data: null,
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS, POST, DELETE'
+              },
+            }).then(response => {
+              console.log(response.data);
+              Swal.fire(
+                '¡Eliminado!',
+                'El cliente ha sido eliminado con éxito.',
+                'success'
+              )
+              //fetchUsers()
+            })
+              .catch(error => {  
+                console.log(error);   
+              });  
+          }    
+        })
+      }
 
-    const { SearchBar, ClearSearchButton } = Search;
+    const { SearchBar } = Search;
 
     const columns = [{
     dataField: 'id',
@@ -49,21 +77,30 @@ export default function Client (){
     dataField: 'name',
     text: 'Client Name'
     }, {
-    dataField: 'dni',
-    text: 'DNI'
+    dataField: 'nif',
+    text: 'NIF/NIE'
     },{
         dataField: 'address',
         text: 'Dirección'
+    }, {
+        dataField: 'location',
+        text: 'Localidad'
+    }, {
+        dataField: 'tlf',
+        text: 'Tlf'
+    }, {
+        dataField: 'fax',
+        text: 'Fax'
     }];
 
     const products = [{
         id: 1,
         name: 'Juan García',
-        dni: '27898755g'
+        nif: '27898755g'
     }, {
         id: 2,
         name: 'Juan Manuel',
-        dni: '47324658k',
+        nif: '47324658k',
     }];
 
     const selectRow = {
@@ -96,7 +133,7 @@ export default function Client (){
                             <Button onClick={showEditModal} style={{ marginLeft: "10px", marginTop: '1rem' }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDeleteF()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
+                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
                         </Col>
                     </Row>
                 </Col>
@@ -110,8 +147,11 @@ export default function Client (){
                     {
                         props => (
                         <div>
-                            <h3>Buscar:</h3>
-                            <SearchBar { ...props.searchProps } />
+                            <Col style={{display: 'flex', flexDirection: 'row', marginTop: '1rem', justifyContent: 'center'}}>
+                                <h3>Buscar {' '}
+                                    <SearchBar { ...props.searchProps } />
+                                </h3>
+                            </Col>
                             <hr />
                             <BootstrapTable
                                 { ...props.baseProps }

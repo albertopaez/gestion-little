@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import AddModal from './AddModal';
 import EditModal from './EditModal'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Invoice (){
 
@@ -11,7 +13,7 @@ export default function Invoice (){
     const [editModal, setEditModal] = useState(false);
     const [selected, setSelected] = useState(false);
     const [actRowIndex, setActRowIndex] = useState(false)
-    const [inscribed, setInscribed] = useState([])
+    const [inscribed] = useState([])
 
     function showAddModal(){
         setAddModal(!addModal)
@@ -29,18 +31,44 @@ export default function Invoice (){
         setSelected(!selected)
     }
 
-    function handleDeleteF(id){
-        var array = [...inscribed];
-        for (let index = 0; index < inscribed.length; index++) {
-          if (inscribed[index] === id) {
-            var i = index;
-          }
-        }
-        array.splice(i, 1);
-        console.log("Eliminado")
-    }
+    const handleDelete = (id) => {
+        Swal.fire({
+          title: '¿Está seguro que desea eliminar el producto?',
+          text: "Esta acción será irreversible.",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si'
+        }).then((result) => {
+          if (result.value) {
+            axios({
+              method: 'delete',
+              url: `http://localhost:8000/posts/${id}`,
+              data: null,
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS, POST, DELETE'
+              },
+            }).then(response => {
+              console.log(response.data);
+              Swal.fire(
+                '¡Eliminado!',
+                'El producto ha sido eliminado con éxito.',
+                'success'
+              )
+              //fetchUsers()
+            })
+              .catch(error => {  
+                console.log(error);   
+              });  
+          }    
+        })
+      }
 
-    const { SearchBar, ClearSearchButton } = Search;
+    const { SearchBar } = Search;
 
     const columns = [{
     dataField: 'id',
@@ -96,10 +124,10 @@ export default function Invoice (){
                             <Button onClick={showEditModal} style={{ marginLeft: "10px" }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDeleteF()} style={{ marginLeft: "10px" }} >Eliminar</Button>
+                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px" }} >Eliminar</Button>
                         </Col>
                     </Row>
-                </Col>
+                </Col> 
             <Row>
                 <ToolkitProvider
                     keyField="id"

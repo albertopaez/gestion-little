@@ -5,7 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "material-ui": "^0.20.2",
     "react": "^16.10.2",
     "react-bootstrap-table-next": "^3.2.1",
     "react-bootstrap-table2-toolkit": "^2.1.0",
@@ -16,7 +18,9 @@
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-form": "^8.2.6",
+    "redux-thunk": "^2.3.0",
+    "sweetalert2": "^8.18.1"
   },
   "scripts": {
     "start": "react-scripts start",

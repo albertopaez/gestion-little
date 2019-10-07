@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Col } from 'reactstrap';
 
 export default function AddModal(props) {
-
-  const [typeOfAdding, setTypeOfAdding] = useState(0)
 
   function showAddModal() {
     props.showAddModalProps()
@@ -29,12 +27,10 @@ export default function AddModal(props) {
             <Label>Email: <Input type="text" id="nif"/></Label>{' '}
           </Col>
         </FormGroup>
-
-        
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={showAddModal} >Añadir</Button>{' '}
-        <Button color="neutral" onClick={showAddModal}>Cancel</Button>{' '}
+        <Button color="neutral" onClick={showAddModal}>Cancelar</Button>{' '}
       </ModalFooter>
     </Modal>
   )
