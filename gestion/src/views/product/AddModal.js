@@ -11,16 +11,6 @@ export default function AddModal(props) {
     props.showAddModalProps()
   }
 
-  function handleTypeOfAdding(e) {
-    if (e.target.value === "Tutor 1") {
-      setTypeOfAdding(0)
-    } else if (e.target.value === "Tutor 2") {
-      setTypeOfAdding(1)
-    } else {
-      setTypeOfAdding(2)
-    }
-  }
-
   return (
     <Modal isOpen={props.addModal} toggle={showAddModal} size="lg">
       <ModalHeader toggle={showAddModal}>Añadir familiar: </ModalHeader>
