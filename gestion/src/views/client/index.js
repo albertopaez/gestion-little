@@ -90,13 +90,13 @@ export default function Client (){
                     <EditModal showEditModalProps={showEditModal} editModal={editModal} /> {/**MODAL EDIT SELECTED FAMILIAR */}
                     <Row >
                         <Col>
-                            <Button onClick={showAddModal} style={{ marginLeft: "20px" }} >Añadir</Button>
+                            <Button onClick={showAddModal} style={{ marginLeft: "20px", marginTop: '1rem' }} >Añadir</Button>
                         </Col>
                         <Col >
-                            <Button onClick={showEditModal} style={{ marginLeft: "10px" }} >Editar</Button>
+                            <Button onClick={showEditModal} style={{ marginLeft: "10px", marginTop: '1rem' }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDeleteF()} style={{ marginLeft: "10px" }} >Eliminar</Button>
+                            <Button onClick={ () => handleDeleteF()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
                         </Col>
                     </Row>
                 </Col>

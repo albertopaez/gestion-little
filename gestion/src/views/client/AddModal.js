@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Col } from 'reactstrap';
 
 export default function AddModal(props) {
 
@@ -14,15 +14,26 @@ export default function AddModal(props) {
       <ModalHeader toggle={showAddModal}>Añadir cliente: </ModalHeader>
       <ModalBody>
         <FormGroup>
-          <Label>Nombre: <Input /></Label>
-          <Label>Apellidos: <Input /></Label>
-          <Label>Nombre: <Input /></Label>
+          <Col>
+            <Label >Nombre: <Input id="name" type="text"/></Label>{' '}
+            <Label>Apellidos: <Input type="text" id="surname"/></Label>{' '}
+            <Label>NIF o NIE: <Input type="text" id="nif"/></Label>{' '}
+          </Col>
+          <Col>
+            <Label>Localidad: <Input type="text" id="nif"/></Label>{' '}
+            <Label>Dirección: <Input type="text" id="nif"/></Label>{' '}
+            <Label>Teléfono: <Input type="text" id="nif"/></Label>{' '}
+          </Col>
+          <Col>
+            <Label>Fax: <Input type="text" id="nif"/></Label>{' '}
+            <Label>Email: <Input type="text" id="nif"/></Label>{' '}
+          </Col>
         </FormGroup>
 
         
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={showAddModal} >Ok</Button>{' '}
+        <Button color="primary" onClick={showAddModal} >Añadir</Button>{' '}
         <Button color="neutral" onClick={showAddModal}>Cancel</Button>{' '}
       </ModalFooter>
     </Modal>
