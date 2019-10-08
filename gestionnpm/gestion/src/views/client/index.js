@@ -71,14 +71,14 @@ export default function Client (){
     const { SearchBar } = Search;
 
     const columns = [{
-    dataField: 'id',
-    text: 'Client ID'
+        dataField: 'id',
+        text: 'ID Cliente'
     }, {
-    dataField: 'name',
-    text: 'Client Name'
+        dataField: 'name',
+        text: 'Nombre cliente'
     }, {
-    dataField: 'nif',
-    text: 'NIF/NIE'
+        dataField: 'nif',
+        text: 'NIF/NIE'
     },{
         dataField: 'address',
         text: 'Dirección'
@@ -133,7 +133,7 @@ export default function Client (){
                             <Button onClick={showEditModal} style={{ marginLeft: "10px", marginTop: '1rem' }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
+                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "5px", marginTop: '1rem' }} >Eliminar</Button>
                         </Col>
                     </Row>
                 </Col>

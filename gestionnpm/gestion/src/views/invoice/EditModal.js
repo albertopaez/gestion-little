@@ -1,6 +1,6 @@
 import React, { } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import Step from '../../components/stepper'
+import Step2 from '../../components/stepper2'
 
 export default function AddModal(props) {
 
@@ -13,7 +13,7 @@ export default function AddModal(props) {
     <Modal isOpen={props.editModal} toggle={showEditModal} size="lg">
       <ModalHeader toggle={showEditModal}>Editar factura: </ModalHeader>
       <ModalBody>
-      <Step />
+      <Step2 />
       </ModalBody>
     </Modal>
   )

@@ -5,8 +5,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import AddClient from '../views/invoice/addInvoice/addClient'
-import AddProduct from '../views/invoice/addInvoice/addProduct';
+import EditClient from '../views/invoice/editInvoice/editClient';
+import EditProducts from '../views/invoice/editInvoice/editProducts';
 import Confirm from '../views/invoice/addInvoice/confirm';
 import Display from '../views/invoice/display';
 
@@ -37,9 +37,9 @@ function getStepContent(stepIndex) {
 
   switch (stepIndex) {
     case 0:
-      return <AddClient />;
+      return <EditClient />;
     case 1:
-      return <AddProduct />;
+      return <EditProducts />;
     case 2:
       return <Confirm />;
     case 3:

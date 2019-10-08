@@ -81,6 +81,9 @@ export default function Product (){
     }, {
         dataField: 'cantidad',
         text: 'Cantidad'
+    }, {
+        dataField: 'iva',
+        text: 'IVA'
     }];
 
     const products = [{

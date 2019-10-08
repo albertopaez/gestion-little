@@ -71,17 +71,14 @@ export default function Invoice (){
     const { SearchBar } = Search;
 
     const columns = [{
-    dataField: 'id',
-    text: 'Client ID'
+        dataField: 'id',
+        text: 'ID Factura'
     }, {
-    dataField: 'name',
-    text: 'Client Name'
+        dataField: 'name',
+        text: 'Client Name'
     }, {
-    dataField: 'dni',
-    text: 'DNI'
-    },{
-        dataField: 'address',
-        text: 'Dirección'
+        dataField: 'nif',
+        text: 'NIE/NIF'
     }];
 
     const products = [{
@@ -118,17 +115,17 @@ export default function Invoice (){
                     <EditModal showEditModalProps={showEditModal} editModal={editModal} /> {/**MODAL EDIT SELECTED FAMILIAR */}
                     <Row >
                         <Col>
-                            <Button onClick={showAddModal} style={{ marginLeft: "20px" }} >Añadir</Button>
+                            <Button onClick={showAddModal} style={{ marginLeft: "20px", marginTop: '1rem' }} >Añadir</Button>
                         </Col>
                         <Col >
-                            <Button onClick={showEditModal} style={{ marginLeft: "10px" }} >Editar</Button>
+                            <Button onClick={showEditModal} style={{ marginLeft: "10px", marginTop: '1rem' }} >Editar</Button>
                         </Col>
                         <Col >
-                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px" }} >Eliminar</Button>
+                            <Button onClick={ () => handleDelete()} style={{ marginLeft: "10px", marginTop: '1rem' }} >Eliminar</Button>
                         </Col>
                     </Row>
                 </Col> 
-            <Row>
+            <Row >
                 <ToolkitProvider
                     keyField="id"
                     data={ products }
@@ -138,8 +135,11 @@ export default function Invoice (){
                     {
                         props => (
                         <div>
-                            <h3>Buscar:</h3>
-                            <SearchBar { ...props.searchProps } />
+                            <Col style={{display: 'flex', flexDirection: 'row', marginTop: '1rem', justifyContent: 'center'}}>
+                                <h3>Buscar {' '}
+                                    <SearchBar { ...props.searchProps } />
+                                </h3>
+                            </Col> 
                             <hr />
                             <BootstrapTable
                                 { ...props.baseProps }

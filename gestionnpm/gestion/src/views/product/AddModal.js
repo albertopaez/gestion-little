@@ -30,6 +30,7 @@ export default function AddModal(props) {
                 <option>50</option>
               </Input>
           </Col>
+          <Col md="3"><Label>IVA</Label><Input /></Col>
           <Label for="exampleText">Descripción</Label>
           <Input type="textarea" name="text" id="exampleText" />
         </FormGroup>
