@@ -1,20 +1,20 @@
 import axios from '../requesters/axios';
 import { apiErrorHandler } from '../actions/errors';
 import {
-  LOAD_USER_SUCCESS,
-  INACTIVE_USER_DONE,
-  ACTIVE_USER_DONE,
-  EDIT_USER_DONE,
-} from '../actionTypes/users.js';
+  LOAD_INVOICE_SUCCESS,
+  INACTIVE_INVOICE_DONE,
+  ACTIVE_INVOICE_DONE,
+  EDIT_INVOICE_DONE,
+} from '../actionTypes/invoice';
 import Swal from 'sweetalert2'
 
-export const fetchUsers = (done = () => { }) => (dispatch) => {
-  axios.get(`/users/`)
+export const fetchInvoice = (done = () => { }) => (dispatch) => {
+  axios.get(`/factura/`)
     .then((response) => {
       dispatch({
-        type: LOAD_USER_SUCCESS,
+        type: LOAD_INVOICE_SUCCESS,
         payload: {
-          users: response.data,
+          invoice: response.data,
         }
       })
       done(response.data)
@@ -25,13 +25,13 @@ export const fetchUsers = (done = () => { }) => (dispatch) => {
     })
 }
 
-export function inactiveUser(userId, done = () => { }) {
+export function inactiveUser(facturaId, done = () => { }) {
   return (dispatch) => {
-    axios.delete(`/users/inactive/${userId}`)
+    axios.delete(`/factura/inactive/${facturaId}`)
       .then((response) => {
-        Swal.fire("Usuario inactivado con éxito.")
+        Swal.fire("Factura inactivada con éxito.")
         dispatch({
-          type: INACTIVE_USER_DONE,
+          type: INACTIVE_INVOICE_DONE,
         })
         done(response.data)
       })
@@ -42,13 +42,13 @@ export function inactiveUser(userId, done = () => { }) {
   }
 }
 
-export function activeUser(userId, done = () => { }) {
+export function activeInvoice(facturaId, done = () => { }) {
   return (dispatch) => {
-    axios.put(`/users/active/${userId}`)
+    axios.put(`/FACTURA/active/${facturaId}`)
       .then((response) => {
-        Swal.fire("Usuario activado con éxito.")
+        Swal.fire("Factura activada con éxito.")
         dispatch({
-          type: ACTIVE_USER_DONE,
+          type: ACTIVE_INVOICE_DONE,
         })
         done(response.data)
       })
@@ -62,12 +62,12 @@ export function activeUser(userId, done = () => { }) {
 
 export function editUser(data, done = () => { }) {
   return (dispatch) => {
-    axios.put(`/users/`, data)
+    axios.put(`/factura/`, data)
       .then(response => {
         console.log(response.data.message);
-        Swal.fire("Usuario editado con éxito.")
+        Swal.fire("Factura editada con éxito.")
         dispatch({
-          type: EDIT_USER_DONE,
+          type: EDIT_INVOICE_DONE,
         })
         done(response.data)
         fetchUsers()

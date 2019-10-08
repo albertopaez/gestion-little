@@ -1,18 +1,18 @@
 import axios from '../requesters/axios';
 import { apiErrorHandler } from '../actions/errors';
 import {
-  LOAD_USER_SUCCESS,
-  INACTIVE_USER_DONE,
-  ACTIVE_USER_DONE,
-  EDIT_USER_DONE,
-} from '../actionTypes/users.js';
+  LOAD_PRODUCT_SUCCESS,
+  INACTIVE_PRODUCT_DONE,
+  ACTIVE_PRODUCT_DONE,
+  EDIT_PRODUCT_DONE,
+} from '../actionTypes/products';
 import Swal from 'sweetalert2'
 
-export const fetchUsers = (done = () => { }) => (dispatch) => {
-  axios.get(`/users/`)
+export const fetchProduct = (done = () => { }) => (dispatch) => {
+  axios.get(`/productos/`)
     .then((response) => {
       dispatch({
-        type: LOAD_USER_SUCCESS,
+        type: LOAD_PRODUCT_SUCCESS,
         payload: {
           users: response.data,
         }
@@ -25,13 +25,13 @@ export const fetchUsers = (done = () => { }) => (dispatch) => {
     })
 }
 
-export function inactiveUser(userId, done = () => { }) {
+export function inactiveProduct(ProductId, done = () => { }) {
   return (dispatch) => {
-    axios.delete(`/users/inactive/${userId}`)
+    axios.delete(`/productos/inactive/${ProductId}`)
       .then((response) => {
-        Swal.fire("Usuario inactivado con éxito.")
+        Swal.fire("Producto inactivado con éxito.")
         dispatch({
-          type: INACTIVE_USER_DONE,
+          type: INACTIVE_PRODUCT_DONE,
         })
         done(response.data)
       })
@@ -42,13 +42,13 @@ export function inactiveUser(userId, done = () => { }) {
   }
 }
 
-export function activeUser(userId, done = () => { }) {
+export function activeProduct(ProductId, done = () => { }) {
   return (dispatch) => {
-    axios.put(`/users/active/${userId}`)
+    axios.put(`/productos/active/${ProductId}`)
       .then((response) => {
-        Swal.fire("Usuario activado con éxito.")
+        Swal.fire("Producto activado con éxito.")
         dispatch({
-          type: ACTIVE_USER_DONE,
+          type: ACTIVE_PRODUCT_DONE,
         })
         done(response.data)
       })
@@ -60,14 +60,14 @@ export function activeUser(userId, done = () => { }) {
 }
 
 
-export function editUser(data, done = () => { }) {
+export function editProduct(data, done = () => { }) {
   return (dispatch) => {
-    axios.put(`/users/`, data)
+    axios.put(`/productos/`, data)
       .then(response => {
         console.log(response.data.message);
-        Swal.fire("Usuario editado con éxito.")
+        Swal.fire("Producto editado con éxito.")
         dispatch({
-          type: EDIT_USER_DONE,
+          type: EDIT_PRODUCT_DONE,
         })
         done(response.data)
         fetchUsers()
