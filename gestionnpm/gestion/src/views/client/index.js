@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import AddModal from './AddModal';
 import EditModal from './EditModal';
 import axios from 'axios'
@@ -10,12 +11,13 @@ import { baseURL } from '../../constants';
 
 export default function Client() {
 
+
     const [addModal, setAddModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [selected, setSelected] = useState(false);
     const [actRowIndex, setActRowIndex] = useState(false)
-    const [inscribed, setInscribed] = useState([])
     const [client, setClient] = useState([]);
+    const [currentClient, setCurrentClient] = useState([]);
 
     function getClients() {
         axios
@@ -33,14 +35,15 @@ export default function Client() {
         getClients();
     }, []);
 
-
     function showAddModal() {
         setAddModal(!addModal)
     }
 
     function showEditModal() {
+      console.log(rowEvents)
         if (selected) {
-            setEditModal(!editModal)
+            setEditModal(!editModal);
+            getClients();
         } else {
             alert("Seleccione una fila")
         }
@@ -48,6 +51,7 @@ export default function Client() {
 
     function handleSelected() {
         setSelected(!selected)
+        console.log("marcado")
     }
 
     const handleDelete = () => {
@@ -168,6 +172,7 @@ export default function Client() {
                                         {...props.baseProps}
                                         selectRow={selectRow}
                                         rowEvents={rowEvents}
+                                        cellEdit={ cellEditFactory({ mode: 'click' }) }
                                     />
                                 </div>
                             )

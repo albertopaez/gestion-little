@@ -5,7 +5,6 @@ import { baseURL } from '../../constants';
 
 export default function AddModal(props) {
 
-
   const [name, setName] = useState('');
   const [surname, setSurname] = useState();
   const [nie, setNie] = useState();
@@ -63,13 +62,13 @@ export default function AddModal(props) {
             <Label>NIF o NIE: <Input onChange={e => setNie(e.target.value)} type="text" id="nif"/></Label>{' '}
           </Col>
           <Col>
-            <Label>Localidad: <Input onChange={e => setLocation(e.target.value)}type="text" id="nif"/></Label>{' '}
-            <Label>Dirección: <Input onChange={e => setAddress(e.target.value)}type="text" id="nif"/></Label>{' '}
-            <Label>Teléfono: <Input onChange={e => setPhone(e.target.value)}type="text" id="nif"/></Label>{' '}
+            <Label>Localidad: <Input onChange={e => setLocation(e.target.value)}type="text" id="location"/></Label>{' '}
+            <Label>Dirección: <Input onChange={e => setAddress(e.target.value)}type="text" id="address"/></Label>{' '}
+            <Label>Teléfono: <Input onChange={e => setPhone(e.target.value)}type="text" id="tlf"/></Label>{' '}
           </Col>
           <Col>
             {/* <Label>Fax: <Input type="text" id="nif"/></Label>{' '} */}
-            <Label>Email: <Input onChange={e => setMail(e.target.value)} type="text" id="nif"/></Label>{' '}
+            <Label>Email: <Input onChange={e => setMail(e.target.value)} type="mail" id="mail"/></Label>{' '}
           </Col>
         </FormGroup>
       </ModalBody>

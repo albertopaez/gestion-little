@@ -51,6 +51,7 @@ export default function Confirm () {
                       data={ products }
                       columns={ columns }
                       cellEdit={ cellEditFactory({ mode: 'click' }) }
+                      search
                     />
                 </Col>
             </Row>

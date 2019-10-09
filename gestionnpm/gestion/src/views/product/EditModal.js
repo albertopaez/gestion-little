@@ -36,7 +36,7 @@ export default function AddModal(props) {
         </FormGroup>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" /*onClick={handleEditFamiliar}*/ onClick={showEditModal} >Ok</Button>{' '}
+        <Button color="primary" onClick={showEditModal} >Ok</Button>{' '}
         <Button color="neutral" onClick={showEditModal}>Cancel</Button>{' '}
       </ModalFooter>
     </Modal>

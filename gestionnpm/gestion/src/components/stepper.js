@@ -9,6 +9,7 @@ import AddClient from '../views/invoice/addInvoice/addClient'
 import AddProduct from '../views/invoice/addInvoice/addProduct';
 import Confirm from '../views/invoice/addInvoice/confirm';
 import Display from '../views/invoice/display';
+import editUser from '../actions/users';
 
 const useStyles = makeStyles(theme => ({
 
@@ -50,7 +51,7 @@ function getStepContent(stepIndex) {
 
 }
 
-export default function HorizontalLabelPositionBelowStepper() {
+export default function HorizontalLabelPositionBelowStepper(props) {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -91,13 +92,13 @@ export default function HorizontalLabelPositionBelowStepper() {
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                className={classes.backButton}
+                className={classes.backeditUserButton}
                 outline color="secondary"
               >
                 Back
               </Button>
               <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Confirmar' : 'Next'}
+                {activeStep === steps.length - 1 ? 'Confirmar' : 'Siguiente'}
               </Button>
             </div>
           </div>
