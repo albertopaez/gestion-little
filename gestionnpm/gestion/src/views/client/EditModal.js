@@ -9,8 +9,6 @@ export default function EditModal(props) {
   const { data } = props;
 
   useEffect(() => {
-    //COMO EL SETSTATE DEL COMPONENTE PADRE ES UNA FUNCIÓN ASÍNCRONA, TENGO QUE HACER UN USEEFFECT
-    // QUE DETECTE CUANDO CAMBIA LA PROP DATA Y ASÍ COLOCAR POR DEFECTO LOS DATOS A EDITAR EN EL FORMULARIO
     data && console.log("data pro props: ", data.id);
     data && setId(data.id);
     data && setName(data.nombre);
